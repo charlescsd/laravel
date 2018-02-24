@@ -8,7 +8,7 @@ node('php'){
         checkout scm
     }
     
-    stage('Build'){
+    stage('Build App'){
         sh 'composer install --no-scripts --prefer-dist --no-dev --ignore-platform-reqs'
     }
     
@@ -19,5 +19,6 @@ node('php'){
     
     stage('Docker Ship') {
         sh 'docker push charlescsd/laravel:$BUILD_NUMBER'
+        sh 'docker rmi -f charlescsd/laravel:$BUILD_NUMBER'
     }
 }
