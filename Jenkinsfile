@@ -12,21 +12,12 @@ node('php'){
         sh 'composer install --no-scripts --prefer-dist --no-dev --ignore-platform-reqs'
     }
     
-    stage('config') {
-        parallel(
-            'config cache': {
-                echo 'Tarefa paralela 01' 
-            },
-            'config route': {
-                echo 'Tarefa Paralela 02'
-            }
-        )
     }
     stage('Docker Build') {
-        sh 'docker build -t jeffersonsouza/laravel:$BUILD_NUMBER .'
+        sh 'docker build -t charlescsd/laravel:$BUILD_NUMBER .'
     }
     
     stage('Docker Ship') {
-        sh 'docker push jeffersonsouza/laravel:$BUILD_NUMBER'
+        sh 'docker push charlescsd/laravel:$BUILD_NUMBER'
     }
 }
