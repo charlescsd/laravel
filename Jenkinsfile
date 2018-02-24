@@ -13,11 +13,11 @@ node('php'){
     }
     
     stage('Docker Build') {
-        sh 'docker build -t charlescsd/laravel:$BUILD_NUMBER .'
+        sh 'docker build -t charlescsd/laravel:$BRANCH_NAME-$BUILD_NUMBER .'
     }
     
     stage('Docker Ship') {
-        sh 'docker push charlescsd/laravel:$BUILD_NUMBER'
-        sh 'docker rmi -f charlescsd/laravel:$BUILD_NUMBER'
+        sh 'docker push charlescsd/laravel:$BRANCH_NAME-$BUILD_NUMBER'
+        sh 'docker rmi -f charlescsd/laravel:$BRANCH_NAME-$BUILD_NUMBER'
     }
 }
