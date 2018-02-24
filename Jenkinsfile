@@ -12,7 +12,6 @@ node('php'){
         sh 'composer install --no-scripts --prefer-dist --no-dev --ignore-platform-reqs'
     }
     
-    }
     stage('Docker Build') {
         sh 'docker build -t charlescsd/laravel:$BUILD_NUMBER .'
     }
